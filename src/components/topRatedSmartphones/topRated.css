@@ -1,0 +1,22 @@
+.topRated-container {
+    border: 3px solid #ccc;
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+
+.phone-card {
+    margin-bottom: 20px;
+}
+
+.phone-number {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.phone-image {
+    max-width: 200px;
+}
+
+.phone-title {
+    margin-left: 10px;
+}

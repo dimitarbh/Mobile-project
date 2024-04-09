@@ -1,0 +1,32 @@
+.brands-container {
+    border: 3px solid #ccc;
+    border-radius: 10px;
+}
+
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+
+
+.brand-item {
+    text-align: center;
+    align-self: center;
+    padding: 10px;
+}
+
+
+.brand-item img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}
+
+.brand-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
