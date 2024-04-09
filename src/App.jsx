@@ -1,10 +1,17 @@
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+import Header from "./components/header/Header";
 
 
 function App() {
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   return (
-    <><p>test</p></>
+    <>
+      <Header isLoggedIn={isLoggedIn} />
+    </>
   );
 }
 
