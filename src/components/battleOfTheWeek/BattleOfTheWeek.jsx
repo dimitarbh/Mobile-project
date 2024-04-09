@@ -1,5 +1,5 @@
 import React from 'react'
-import './battleOfTheWeek.css'
+import './BattleOfTheWeek.css'
 
 const BattleOfTheWeek = () => {
     return (

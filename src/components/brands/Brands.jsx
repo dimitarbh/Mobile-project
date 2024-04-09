@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Container } from 'react-bootstrap';
-import './brands.css'
+import './Brands.css'
 
 const Brands = () => {
 
