@@ -1,0 +1,16 @@
+.social-icons-container {
+    display: flex;
+    align-items: center;
+}
+
+.follow-text {
+    margin-right: 10px;
+}
+
+.social-icons {
+    display: flex;
+}
+
+.social-icon {
+    margin-right: 6px;
+}
