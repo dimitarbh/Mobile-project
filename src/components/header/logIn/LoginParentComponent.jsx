@@ -18,6 +18,13 @@ const LoginParentComponent = () => {
       return;
     }
 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
     try {
       const response = await fetch('smartphonearena-be-production.up.railway.app/auth/login', {
         method: 'POST',

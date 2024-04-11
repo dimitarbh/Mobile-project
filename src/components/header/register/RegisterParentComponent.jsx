@@ -23,6 +23,13 @@ const RegisterParentComponent = () => {
       return;
     }
 
+    // Email validation using regular expression
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
     try {
       const response = await fetch('localhost:3000/auth/register', {
         method: 'POST',
