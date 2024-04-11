@@ -1,42 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const LoginModal = ({ show, handleClose }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');  
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-      setError('Please enter both email and password');
-      return;
-    }
-
-    try {
-      const response = await fetch('http://localhost:3000/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log('Login successful');
-        handleClose(); 
-      } else {
-        setError(data.message || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      setError('An error occurred during login');
-    }
-  };
-
+const LoginModal = ({ show, handleClose, handleSubmit, handleChangeEmail, handleChangePassword, email, password, error }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -50,7 +15,7 @@ const LoginModal = ({ show, handleClose }) => {
               type="email"
               placeholder="Enter email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChangeEmail}
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -59,7 +24,7 @@ const LoginModal = ({ show, handleClose }) => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChangePassword}
             />
           </Form.Group>
           {error && <p style={{ color: 'red' }}>{error}</p>}
