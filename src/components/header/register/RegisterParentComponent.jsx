@@ -40,29 +40,8 @@ const RegisterParentComponent = () => {
 
     dispatch(registerAction({ email, password }));
 
-    navigate.push('/');
+    navigate('/');
 
-    try {
-      const response = await fetch('smartphonearena-be-production.up.railway.app/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log('Registration successful');
-        handleCloseRegisterModal();
-      } else {
-        setError(data.message || 'Registration failed');
-      }
-    } catch (error) {
-      console.error('Error during registration:', error);
-      setError('An error occurred during registration');
-    }
   };
 
   return (
