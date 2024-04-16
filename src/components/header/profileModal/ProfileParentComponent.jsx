@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
+
+import { useDispatch, useSelector } from "react-redux";
+import { profile as profileAction } from "../../redux/slices/authSlice.js";
 
 const ProfileParentComponent = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -10,6 +13,13 @@ const ProfileParentComponent = () => {
   const [profilePicture, setProfilePicture] = useState(
     "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
   );
+
+  const dispatch = useDispatch();
+  const { profile, isLoading, error: profileError } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(profileAction())
+  }, [dispatch]);
 
   const handleCloseProfileModal = () => {
     setShowProfileModal(false);
@@ -69,6 +79,8 @@ const ProfileParentComponent = () => {
         profilePicture={profilePicture}
         setEmail={setCurrentEmail}
         setPassword={setCurrentPassword}
+        profile={profile}
+        isLoading={isLoading}
       />
     </>
   );

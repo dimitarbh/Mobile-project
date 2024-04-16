@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import React from "react";
+import { Modal, Button, Form, Spinner } from "react-bootstrap";
 
 const ProfileModal = ({
   show,
@@ -15,6 +15,7 @@ const ProfileModal = ({
   profilePicture,
   setEmail,
   setPassword,
+  isLoading
 }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -22,64 +23,74 @@ const ProfileModal = ({
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <div className="text-center mb-3">
-            <img
-              src={profilePicture}
-              alt="Profile"
-              style={{
-                width: "150px",
-                height: "150px",
-                borderRadius: "50%",
-              }}
-            />
+        {isLoading ? (
+          <div className="text-center">
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
           </div>
-          <Form.Group controlId="formBasicProfilePicture">
-            <Form.Label>Change Profile Picture</Form.Label>
-            <Form.Control
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePictureChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={currentEmail}
-              onChange={(e) => setEmail(e.target.value)}
-              readOnly={!isEditMode}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={currentPassword}
-              onChange={(e) => setPassword(e.target.value)}
-              readOnly={!isEditMode}
-            />
-          </Form.Group>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          {isEditMode ? (
-            <div className="d-flex justify-content-around align-items-center">
-              <Button variant="primary" type="submit">
-                Update Profile
-              </Button>
-              <Button variant="secondary" onClick={handleCancelEdit}>
-                Cancel
-              </Button>
-            </div>
-          ) : (
-            <div className="text-center">
-              <Button variant="primary" onClick={handleEditProfile}>
-                Edit Profile
-              </Button>
-            </div>
-          )}
-        </Form>
+        ) : (
+          <>
+            <Form onSubmit={handleSubmit}>
+              <div className="text-center mb-3">
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+              <Form.Group controlId="formBasicProfilePicture">
+                <Form.Label>Change Profile Picture</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={currentEmail}
+                  onChange={(e) => setEmail(e.target.value)}
+                  readOnly={!isEditMode}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={currentPassword}
+                  onChange={(e) => setPassword(e.target.value)}
+                  readOnly={!isEditMode}
+                />
+              </Form.Group>
+              {error && <p style={{ color: "red" }}>{error}</p>}
+              {isEditMode ? (
+                <div className="d-flex justify-content-around align-items-center">
+                  <Button variant="primary" type="submit">
+                    Update Profile
+                  </Button>
+                  <Button variant="secondary" onClick={handleCancelEdit}>
+                    Cancel
+                  </Button>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <Button variant="primary" onClick={handleEditProfile}>
+                    Edit Profile
+                  </Button>
+                </div>
+              )}
+            </Form>
+          </>
+        )}
       </Modal.Body>
     </Modal>
   );

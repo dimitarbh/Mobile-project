@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React from "react";
+import { Modal, Button, Form, Spinner } from "react-bootstrap";
 
-const RegisterModal = ({ show, handleClose, handleSubmit, setEmail, setPassword, setConfirmPassword, email, password, confirmPassword, error }) => {
+const RegisterModal = ({
+  show,
+  handleClose,
+  handleSubmit,
+  setEmail,
+  setPassword,
+  setConfirmPassword,
+  email,
+  password,
+  confirmPassword,
+  error,
+  isLoading,
+}) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -36,13 +48,24 @@ const RegisterModal = ({ show, handleClose, handleSubmit, setEmail, setPassword,
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <div className="d-flex justify-content-around align-items-center" style={{ marginTop: '10px' }}>
-            <Button variant="primary" type="submit">
-              Register
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <div
+            className="d-flex justify-content-around align-items-center"
+            style={{ marginTop: "10px" }}
+          >
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                "Register"
+              )}
             </Button>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Close"}
             </Button>
           </div>
         </Form>

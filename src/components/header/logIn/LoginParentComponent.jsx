@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import LoginModal from './LogInModal';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { login as loginAction } from '../../redux/slices/authSlice.js';
+import { useNavigate } from 'react-router-dom';
+
 const LoginParentComponent = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');  
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading, error: authError } = useSelector(state => state.auth);
 
   const handleClose = () => {
     setShowLoginModal(false);
@@ -24,6 +31,9 @@ const LoginParentComponent = () => {
       setError('Please enter a valid email address');
       return;
     }
+
+    dispatch(loginAction({ email, password }));
+    navigate.push('/');
 
     try {
       const response = await fetch('smartphonearena-be-production.up.railway.app/auth/login', {
@@ -66,7 +76,8 @@ const LoginParentComponent = () => {
         handleChangePassword={handleChangePassword}
         email={email}
         password={password}
-        error={error}
+        error={error || authError} 
+        isLoading={isLoading}
       />
     </>
   );

@@ -1,7 +1,17 @@
-import React from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
-const LoginModal = ({ show, handleClose, handleSubmit, handleChangeEmail, handleChangePassword, email, password, error }) => {
+const LoginModal = ({
+  show,
+  handleClose,
+  handleSubmit,
+  handleChangeEmail,
+  handleChangePassword,
+  email,
+  password,
+  error,
+  isLoading,
+}) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -27,13 +37,24 @@ const LoginModal = ({ show, handleClose, handleSubmit, handleChangeEmail, handle
               onChange={handleChangePassword}
             />
           </Form.Group>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <div className="d-flex justify-content-around align-items-center" style={{ marginTop: '10px' }}>
-            <Button variant="primary" type="submit">
-              Login
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <div
+            className="d-flex justify-content-around align-items-center"
+            style={{ marginTop: "10px" }}
+          >
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                "Login"
+              )}
             </Button>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Close"}
             </Button>
           </div>
         </Form>
