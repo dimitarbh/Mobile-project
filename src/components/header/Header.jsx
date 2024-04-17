@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import LoginModal from './logIn/LogInModal';
-import RegisterModal from './register/RegisterModal';
+import RegisterModal from './register/RegisterParentComponent.jsx';
 import ProfileModal from './profileModal/ProfileModal';
 
 const Header = ({ isLoggedIn, onSignOut }) => {
