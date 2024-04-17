@@ -38,10 +38,16 @@ const RegisterParentComponent = () => {
       return;
     }
 
-    dispatch(registerAction({ email, password }));
-
-    navigate('/');
-
+    dispatch(registerAction({ email, password }))
+        .then(() => {
+          setFeedbackMessage('Registration successful! Logging you in.');
+            setTimeout(() => {
+                navigate('/');
+            }, 2000)
+        })
+        .catch((error) => {
+            setFeedbackMessage('Registration failed: ' + error.message);
+        })
   };
 
   return (
