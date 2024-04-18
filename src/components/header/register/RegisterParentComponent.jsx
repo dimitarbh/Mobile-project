@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {register as registerAction} from '../../redux/slices/authSlice.js';
 import {useNavigate} from 'react-router-dom';
 import {Modal, Button} from 'react-bootstrap';
+import './registerComponent.css';
 
 const RegisterComponent = () => {
     const [email, setEmail] = useState('');
@@ -35,46 +36,41 @@ const RegisterComponent = () => {
         console.log('Dispatching register action:', { email, password });
         dispatch(registerAction({email, password}));
         setErrorMessage('');
-        setFeedbackMessage('Registration in progress...');
+        setFeedbackMessage('Registration is completed');
     };
 
 
 
     return (
         <>
-            <Button onClick={handleShow}>Open Register Modal</Button>
+            <Button variant="primary" onClick={handleShow}>Register</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Register</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleFormSubmit}>
-                        {errorMessage && <div style={{color: 'red'}}>{errorMessage}</div>}
+                        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                         {feedbackMessage && (
                             <div className="feedback-message">{feedbackMessage}</div>
                         )}
-                        <p>
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" placeholder="Email" value={email}
-                                   onChange={(e) => setEmail(e.target.value)}/>
-                        </p>
-                        <p>
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" placeholder="Password" value={password}
-                                   onChange={(e) => setPassword(e.target.value)}/>
-                        </p>
-                        <p>
-                            <label htmlFor="repeatPassword">Repeat password</label>
-                            <input type="password" id="repeatPassword" placeholder="Repeat password"
-                                   value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)}/>
-                        </p>
-                        <button type="submit" className="btn btn-primary">Register</button>
-                        <button onClick={handleFormSubmit} className="btn btn-primary">Register Test</button>
+                        <div className="mb-3">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <input type="email" id="email" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" id="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="repeatPassword" className="form-label">Repeat Password</label>
+                            <input type="password" id="repeatPassword" className="form-control" placeholder="Repeat Password" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
+                        </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant="primary" type="submit" disabled={isLoading} onClick={handleFormSubmit}>Register</Button>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>
-
                 </Modal.Footer>
             </Modal>
         </>
@@ -82,3 +78,5 @@ const RegisterComponent = () => {
 };
 
 export default RegisterComponent;
+
+

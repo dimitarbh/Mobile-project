@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import LoginModal from './logIn/LogInModal';
-import RegisterModal from './register/RegisterParentComponent.jsx';
+import LoginComponent from './logIn/LoginComponent';
+import RegisterComponent from './register/RegisterParentComponent'; // Import the RegisterComponent
 import ProfileModal from './profileModal/ProfileModal';
 
 const Header = ({ isLoggedIn, onSignOut }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false); // Add state for register modal
   const [showProfileModal, setShowProfileModal] = useState(false);
 
-   //otvun header
   const handleShowLoginModal = () => {
     setShowLoginModal(true);
   };
@@ -38,8 +37,6 @@ const Header = ({ isLoggedIn, onSignOut }) => {
     onSignOut();
   };
 
-  //otvun header
-
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -62,16 +59,16 @@ const Header = ({ isLoggedIn, onSignOut }) => {
                 </>
               ) : (
                 <>
-                  <Nav.Link onClick={handleShowLoginModal}>Log in</Nav.Link>
-                  <Nav.Link onClick={handleShowRegisterModal}>Register</Nav.Link>
+                  <div style={{ marginRight: '10px' }}>
+                    <LoginComponent show={showLoginModal} handleClose={handleCloseLoginModal} />
+                  </div>
+                    <RegisterComponent show={showRegisterModal} handleClose={handleCloseRegisterModal} />
                 </>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <LoginModal show={showLoginModal} handleClose={handleCloseLoginModal} />
-      <RegisterModal show={showRegisterModal} handleClose={handleCloseRegisterModal} />
       <ProfileModal show={showProfileModal} handleClose={handleCloseProfileModal} />
     </>
   );
