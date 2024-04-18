@@ -24,6 +24,7 @@ const LoginComponent = () => {
     console.log('Dispatching login action:', { email, password });
     dispatch(loginAction({ email, password }));
     setErrorMessage('');
+    
   };
 
   return (

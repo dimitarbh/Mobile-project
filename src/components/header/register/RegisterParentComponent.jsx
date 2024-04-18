@@ -14,6 +14,7 @@ const RegisterComponent = () => {
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const {user, isLoading, error} = useSelector(state => state.auth);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -33,11 +34,21 @@ const RegisterComponent = () => {
             setErrorMessage('Passwords do not match');
             return;
         }
+
+        dispatch(registerAction({email, password}))
+        .then(() => {
+            setErrorMessage('error: ');
+            setTimeout(() => {
+                navigate('/about');
+                handleClose();
+            }, 2000)
+        })
+        .catch((error) =>{
+            setFeedbackMessage('Registration is completed');
+        })
         console.log('Dispatching register action:', { email, password });
-        dispatch(registerAction({email, password}));
-        setErrorMessage('');
-        setFeedbackMessage('Registration is completed');
-    };
+    }; 
+    
 
 
 
