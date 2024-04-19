@@ -37,15 +37,19 @@ const RegisterComponent = () => {
 
         dispatch(registerAction({email, password}))
         .then(() => {
-            setErrorMessage('error: ');
+            setFeedbackMessage('Registration is completed');
             setTimeout(() => {
-                navigate('/about');
+                navigate('/');
                 handleClose();
             }, 2000)
         })
-        .catch((error) =>{
-            setFeedbackMessage('Registration is completed');
-        })
+        .catch((error) => {
+            if (error.response && error.response.status === 409) {
+                setErrorMessage('Registration already exists. Please choose a different email.');
+            } else {
+                setErrorMessage('Registration failed. Please try again.');
+            }
+        });
         console.log('Dispatching register action:', { email, password });
     }; 
     

@@ -3,6 +3,9 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import LoginComponent from './logIn/LoginComponent';
 import RegisterComponent from './register/RegisterParentComponent'; // Import the RegisterComponent
 import ProfileModal from './profileModal/ProfileModal';
+import Navigation from "../navigation/navigation.jsx";
+import { Route, Routes } from "react-router-dom";
+
 
 const Header = ({ isLoggedIn, onSignOut }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -45,11 +48,13 @@ const Header = ({ isLoggedIn, onSignOut }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />  
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#news">News</Nav.Link>
-              <Nav.Link href="#reviews">Reviews</Nav.Link>
-              <Nav.Link href="#deals">Deals</Nav.Link>
-              <Nav.Link href="#contact">Contact</Nav.Link>
+              <Routes>
+                <Route path="/" element={<Navigation />} />
+                <Route path="/news" element={<Navigation />} />
+                <Route path="/reviews" element={<Navigation />} />
+                <Route path="/deals" element={<Navigation />} />
+                <Route path="/contact" element={<Navigation />} />
+              </Routes>
             </Nav>
             <Nav>
               {isLoggedIn ? (

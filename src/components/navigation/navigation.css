@@ -1,0 +1,9 @@
+nav {
+    display: flex; /* Use flexbox */
+}
+
+.nav-link {
+    margin-right: 10px; /* Margin right */
+    text-decoration: none; /* Text decoration none */
+    color: white; /* Font color */
+}
