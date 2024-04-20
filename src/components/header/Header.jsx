@@ -1,44 +1,40 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import LoginComponent from './logIn/LoginComponent';
-import RegisterComponent from './register/RegisterParentComponent'; // Import the RegisterComponent
+import RegisterComponent from './register/RegisterParentComponent';
 import ProfileModal from './profileModal/ProfileModal';
 import Navigation from "../navigation/navigation.jsx";
-import { Route, Routes } from "react-router-dom";
-
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 const Header = ({ isLoggedIn, onSignOut }) => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false); // Add state for register modal
   const [showProfileModal, setShowProfileModal] = useState(false);
-
-  const handleShowLoginModal = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleCloseLoginModal = () => {
-    setShowLoginModal(false);
-  };
-
-  const handleShowRegisterModal = () => {
-    setShowRegisterModal(true);
-  };
-
-  const handleCloseRegisterModal = () => {
-    setShowRegisterModal(false);
-  };
+  const navigate = useNavigate();
 
   const handleShowProfileModal = () => {
     setShowProfileModal(true);
+    console.log("Show Profile Modal");
   }
 
   const handleCloseProfileModal = () => {
     setShowProfileModal(false);
+    console.log("Close Profile Modal");
   }
 
   const handleSignOut = () => {
     onSignOut();
+    setShowProfileModal(false);
+    navigate('/'); // Navigate to home page after sign out
+    console.log("Sign Out");
   };
+
+  console.log("Is Logged In:", isLoggedIn);
+
+  const handleLoginSuccess = useCallback(() => {
+    setShowProfileModal(false);
+    console.log("Logged in successfully")
+  },[]);
+
+
 
   return (
     <>
@@ -65,9 +61,9 @@ const Header = ({ isLoggedIn, onSignOut }) => {
               ) : (
                 <>
                   <div style={{ marginRight: '10px' }}>
-                    <LoginComponent show={showLoginModal} handleClose={handleCloseLoginModal} />
+                    <LoginComponent onSuccess={handleLoginSuccess} />
                   </div>
-                    <RegisterComponent show={showRegisterModal} handleClose={handleCloseRegisterModal} />
+                  <RegisterComponent />
                 </>
               )}
             </Nav>

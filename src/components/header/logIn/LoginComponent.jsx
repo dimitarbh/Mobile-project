@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login as loginAction } from '../../redux/slices/authSlice.js';
+import { login as loginAction } from '../../redux/slices/authSlice.js'; // Update import statement
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const LoginComponent = () => {
+const LoginComponent = ({ onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -29,6 +29,7 @@ const LoginComponent = () => {
       .then(() => {
         setSuccessMessage('Logged in successfully');
         console.log('Logged in successfully');
+        onSuccess(); 
         setTimeout(() => {
           navigate('/');
           handleClose();

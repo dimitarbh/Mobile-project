@@ -24,6 +24,7 @@ export const login = createAsyncThunk(
                 return thunkAPI.rejectWithValue(errorData)
             }
             const userData = await response.json()
+            thunkAPI.dispatch(loginSuccess(userData));
             return userData.user
         } catch(error){
             return thunkAPI.rejectWithValue(error.message)
@@ -56,27 +57,27 @@ export const register = createAsyncThunk(
     }
 )
 
-// export const profile = createAsyncThunk(
-//     'auth/profile',
-//     async (_, thunkAPI) => {
-//         try {
-//             const response = await fetch('https://smartphonearena-be-production.up.railway.app/auth/profile', {
-//                 method: 'GET',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 }
-//             });
-//             if (!response.ok) {
-//                 const errorData = await response.json();
-//                 return thunkAPI.rejectWithValue(errorData);
-//             }
-//             const profileData = await response.json();
-//             return profileData;
-//         } catch (error) {
-//             return thunkAPI.rejectWithValue(error.message);
-//         }
-//     }
-// );
+export const profile = createAsyncThunk(
+    'auth/profile',
+    async (_, thunkAPI) => {
+        try {
+            const response = await fetch('https://smartphonearena-be-production.up.railway.app/auth/profile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                return thunkAPI.rejectWithValue(errorData);
+            }
+            const profileData = await response.json();
+            return profileData;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
 
 const authAPI = createSlice({
     name: 'auth',
@@ -88,9 +89,9 @@ const authAPI = createSlice({
         logout: (state) => {
             state.user = null
         },
-        // updateProfile: (state, action) => {
-        //     state.profile = action.payload
-        // }
+        updateProfile: (state, action) => {
+            state.profile = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -102,19 +103,27 @@ const authAPI = createSlice({
             state.user = action.payload
             state.error = null 
         })
-        // .addCase(profile.fulfilled, (state, action) => {
-        //     state.profile = action.payload
-        //     state.isLoading = false
-        //     state.error = null
-        // })
-        // .addCase(profile.pending, (state) => {
-        //     state.isLoading = true
-        //     state.error = null
-        // })
-        // .addCase(profile.rejected, (state, action) => {
-        //     state.isLoading = false
-        //     state.error = action.payload
-        // })
+        .addCase(register.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+        })
+        .addCase(register.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+        .addCase(profile.fulfilled, (state, action) => {
+            state.profile = action.payload
+            state.isLoading = false
+            state.error = null
+        })
+        .addCase(profile.pending, (state) => {
+            state.isLoading = true
+            state.error = null
+        })
+        .addCase(profile.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
     }
 })
 
