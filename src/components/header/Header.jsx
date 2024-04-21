@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import LoginComponent from './logIn/LoginComponent';
 import RegisterComponent from './register/RegisterParentComponent';
@@ -6,9 +6,19 @@ import ProfileModal from './profileModal/ProfileModal';
 import Navigation from "../navigation/navigation.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-const Header = ({ isLoggedIn, onSignOut }) => {
+const Header = ({ onSignOut }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(isLoggedIn === null) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        setIsLoggedIn(true)
+      }
+    }
+  }, [isLoggedIn]);
 
   const handleShowProfileModal = () => {
     setShowProfileModal(true);
@@ -22,8 +32,10 @@ const Header = ({ isLoggedIn, onSignOut }) => {
 
   const handleSignOut = () => {
     onSignOut();
+    localStorage.removeItem('token');
     setShowProfileModal(false);
-    navigate('/'); // Navigate to home page after sign out
+    setIsLoggedIn(false);
+    navigate('/'); 
     console.log("Sign Out");
   };
 
@@ -31,6 +43,7 @@ const Header = ({ isLoggedIn, onSignOut }) => {
 
   const handleLoginSuccess = useCallback(() => {
     setShowProfileModal(false);
+    setIsLoggedIn(true);
     console.log("Logged in successfully")
   },[]);
 
