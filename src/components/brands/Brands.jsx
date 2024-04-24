@@ -12,9 +12,10 @@ const Brands = () => {
 
     useEffect(() => {
         dispatch(brands()); 
-    }, [dispatch]);
+    }, [dispatch]); 
 
     console.log("Brands Data:", brandsData);
+    console.log("Redux State:", useSelector((state) => state));
 
     return (
         <Container className="brands-container">
@@ -29,9 +30,9 @@ const Brands = () => {
                         <div className="brand-item" key={index}>
                             <Nav.Link href="#" className="brand-item">
                                 <div className="logo">
-                                    <img src={brand.imageUrl} alt={brand.name} />
+                                    <img src={brand.image} alt={brand.brand} />
                                 </div>
-                                <p>{brand.name}</p>
+                                <p>{brand.brand}</p>
                             </Nav.Link>
                         </div>
                     ))}
