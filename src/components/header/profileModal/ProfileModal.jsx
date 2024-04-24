@@ -15,6 +15,7 @@ const ProfileModal = ({
   profilePicture,
   setEmail,
   setPassword,
+  profile,
   isLoading
 }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login as loginAction } from '../../redux/slices/authSlice.js'; // Update import statement
+import { login as loginAction } from '../../redux/slices/authSlice.js'; 
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +26,9 @@ const LoginComponent = ({ onSuccess }) => {
     }
 
     dispatch(loginAction({ email, password }))
-      .then(() => {
+      .then((authToken) => {
+        localStorage.setItem('token', authToken);
+        // console.log('Token stored in localStorage:', authToken);
         setSuccessMessage('Logged in successfully');
         console.log('Logged in successfully');
         onSuccess(); 

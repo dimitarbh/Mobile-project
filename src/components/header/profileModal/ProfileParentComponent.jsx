@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
+import { Modal, Button, Form, Spinner } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { profile as profileAction } from "../../redux/slices/authSlice.js";
@@ -11,7 +12,7 @@ const ProfileParentComponent = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [error, setError] = useState("");
   const [profilePicture, setProfilePicture] = useState(
-    "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+    "https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"
   );
 
   const dispatch = useDispatch();

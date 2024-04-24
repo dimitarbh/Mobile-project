@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import LoginComponent from './logIn/LoginComponent';
 import RegisterComponent from './register/RegisterParentComponent';
@@ -12,22 +12,18 @@ const Header = ({ onSignOut }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(isLoggedIn === null) {
-      const token = localStorage.getItem('token');
-      if(token) {
-        setIsLoggedIn(true)
-      }
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
     }
-  }, [isLoggedIn]);
+  }, []);
 
   const handleShowProfileModal = () => {
     setShowProfileModal(true);
-    console.log("Show Profile Modal");
   }
 
   const handleCloseProfileModal = () => {
     setShowProfileModal(false);
-    console.log("Close Profile Modal");
   }
 
   const handleSignOut = () => {
@@ -35,19 +31,13 @@ const Header = ({ onSignOut }) => {
     localStorage.removeItem('token');
     setShowProfileModal(false);
     setIsLoggedIn(false);
-    navigate('/'); 
-    console.log("Sign Out");
+    navigate('/login'); // Redirect to login page after sign out
   };
 
-  console.log("Is Logged In:", isLoggedIn);
-
-  const handleLoginSuccess = useCallback(() => {
+  const handleLoginSuccess = () => {
     setShowProfileModal(false);
     setIsLoggedIn(true);
-    console.log("Logged in successfully")
-  },[]);
-
-
+  };
 
   return (
     <>
