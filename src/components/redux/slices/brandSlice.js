@@ -19,6 +19,15 @@ export const brands = createAsyncThunk(
     }
 );
 
+export const modelsData = createAsyncThunk(
+    'brand/models',
+    async (brandId, thunkAPI) => {
+        try {
+            const response = await axios.get('https://smartphonearena-be-production.up.railway.app/brands/')
+        }
+    }
+)
+
 const brandsSlice = createSlice({
     name: 'brands',
     initialState,

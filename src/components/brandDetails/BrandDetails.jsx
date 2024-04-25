@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useSelector } from 'react-redux'
+
 
 const BrandsDetails = () => {
     const { brandId } = useParams();
@@ -8,20 +9,8 @@ const BrandsDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchBrandDetails = async () => {
-            try {
-                const response = await axios.get(`https://smartphonearena-be-production.up.railway.app/brands/${brandId}`);
-                setBrandDetails(response.data.brand);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    const modelsData = useSelector((state) => {state.brands})
 
-        fetchBrandDetails();
-    }, [brandId]);
 
     if (isLoading) {
         return <div>Loading...</div>;
