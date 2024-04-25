@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { Nav, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { brands } from '../redux/slices/brandSlice.js'
+import { brands } from '../redux/slices/brandSlice.js';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Brands.css';
 
 const Brands = () => {
     const dispatch = useDispatch();
-    const brandsData = useSelector((state) => state.brands.brands);
+    const brandsData = useSelector((state) => state.brands.brands); 
     const isLoading = useSelector((state) => state.brands.isLoading);
     const error = useSelector((state) => state.brands.error);
 
@@ -26,21 +27,20 @@ const Brands = () => {
                 <div>Error: {error}</div>
             ) : (
                 <section className="brands-grid">
-                    {Array.isArray(brandsData) && brandsData.map((brand, index) => (
+                    {brandsData.map((brand, index) => (
                         <div className="brand-item" key={index}>
-                            <Nav.Link href="#" className="brand-item">
+                            <Link to={`/brands/${brand.id}`} className="brand-link"> 
                                 <div className="logo">
                                     <img src={brand.image} alt={brand.brand} />
                                 </div>
                                 <p>{brand.brand}</p>
-                            </Nav.Link>
+                            </Link>
                         </div>
                     ))}
                 </section>
             )}
         </Container>
     );
-    
 }
 
 export default Brands;

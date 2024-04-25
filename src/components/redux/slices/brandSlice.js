@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
     brands: [],
@@ -10,20 +11,9 @@ export const brands = createAsyncThunk(
     'brands',
     async (_, thunkAPI) => {
         try {
-            const response = await fetch(
-                'https://smartphonearena-be-production.up.railway.app/brands',
-                {
-                    method: 'GET',
-                    headers: {'Content-Type':'application/json'},
-                }
-            )
-            if (!response.ok) {
-                const errorData = await response.json();
-                return thunkAPI.rejectWithValue(errorData);
-            }
-            const brandsData = await response.json();
-            return brandsData;
-        } catch(error) {
+            const response = await axios.get('https://smartphonearena-be-production.up.railway.app/brands');
+            return response.data.brand; 
+        } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
     }
