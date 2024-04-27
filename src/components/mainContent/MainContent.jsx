@@ -5,7 +5,8 @@ import Brands from '../brands/Brands';
 import TopNews from '../topNews/TopNews';
 import TopRated from '../topRatedSmartphones/TopRated';
 import BattleOfTheWeek from '../battleOfTheWeek/BattleOfTheWeek';
-import BrandsDetails from '../brandDetails/BrandDetails.jsx'; // Import the BrandsDetails component
+import BrandsDetails from '../brandDetails/BrandDetails.jsx'; 
+
 
 const MainContent = () => {
     return (
