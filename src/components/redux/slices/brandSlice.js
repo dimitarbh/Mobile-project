@@ -12,8 +12,8 @@ export const fetchBrands = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axios.get('https://smartphonearena-be-production.up.railway.app/brands');
-            console.log(response.data)
-            return response.data.brands; 
+            console.log(response.data.brands)
+            return response.data.allBrands; 
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
