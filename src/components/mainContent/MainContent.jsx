@@ -5,8 +5,7 @@ import Brands from '../brands/Brands';
 import TopNews from '../topNews/TopNews';
 import TopRated from '../topRatedSmartphones/TopRated';
 import BattleOfTheWeek from '../battleOfTheWeek/BattleOfTheWeek';
-import BrandsDetails from '../brandDetails/BrandDetails.jsx'; 
-
+import BrandModels from '../brandModels/BrandModels.jsx';
 
 const MainContent = () => {
     return (
@@ -15,7 +14,7 @@ const MainContent = () => {
                 <Col sm={8}>
                     <Routes>
                         <Route exact path="/" element={<Brands />} />
-                        <Route path="/brands/:brandId" element={<BrandsDetails />} />
+                        <Route path="/brands/:brandId" element={<BrandModels />} />
                     </Routes>
                 </Col>
                 <Col sm={4}>
