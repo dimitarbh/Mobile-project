@@ -25,7 +25,7 @@ export const fetchModelsByBrand = createAsyncThunk(
     async (brandId, thunkAPI) => {
         try {
             const response = await axios.get(`https://smartphonearena-be-production.up.railway.app/brands/${brandId}/models`);
-            return response.data.models;
+            return response.data.AllModels;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
