@@ -12,6 +12,7 @@ export const fetchBrands = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axios.get('https://smartphonearena-be-production.up.railway.app/brands');
+            console.log(response.data)
             return response.data.allBrand;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -23,8 +24,8 @@ export const fetchModelsByBrand = createAsyncThunk(
     'brands/fetchModelsByBrand',
     async (brandId, thunkAPI) => {
         try {
-            const response = await axios.get(`https://smartphonearena-be-production.up.railway.app/brands/${brandId}/models`);
-            return { brandId, models: response.data.AllModels };
+            const response = await axios.get(`https://smartphonearena-be-production.up.railway.app/brands/allBrandModels/${brandId}`);
+            return { brandId, models: response.data.allModels };
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }

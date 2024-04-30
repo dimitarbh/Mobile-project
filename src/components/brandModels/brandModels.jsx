@@ -8,24 +8,23 @@ const BrandModels = () => {
   const dispatch = useDispatch();
   const models = useSelector((state) => state.brands.models);
   const isLoading = useSelector((state) => state.brands.isLoading);
-  console.log("BrandId:", brandId);
+
   useEffect(() => {
-    console.log("BrandId:", brandId);
     if (brandId) {
       dispatch(fetchModelsByBrand(brandId));
     }
   }, [dispatch, brandId]);
 
+  if (!brandId) {
+    return <div>No brand selected</div>;
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  if (!models) {
-    return <div>No models found</div>;
-  }
-
-  if (!brandId) {
-    return <div>No brand selected</div>;
+  if (!models || models.length === 0) {
+    return <div>No models found for brand {brandId}</div>;
   }
 
   return (
