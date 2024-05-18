@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchModelsByBrand } from "../redux/slices/brandSlice";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import './brandModels.css'
 
 const BrandModels = () => {
-  const { brandId } = useParams();
   const dispatch = useDispatch();
+  const { brandId } = useParams();
   const models = useSelector((state) => state.brands.models);
   const isLoading = useSelector((state) => state.brands.isLoading);
+  const error = useSelector((state) => state.brands.error);
+  const [selectedModelId, setSelectedModelId] = useState(null);
 
   useEffect(() => {
     if (brandId) {
@@ -15,28 +20,43 @@ const BrandModels = () => {
     }
   }, [dispatch, brandId]);
 
-  if (!brandId) {
-    return <div>No brand selected</div>;
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!models || models.length === 0) {
-    return <div>No models found for brand {brandId}</div>;
-  }
+  const handleModelClick = (modelId) => {
+    setSelectedModelId(modelId);
+  };
 
   return (
-    <div>
-      <h2>Models for Brand {brandId}</h2>
-      {models.map((model) => (
-        <div key={model.id}>
-          <img src={model.image} alt={model.name} />
-          <p>{model.name}</p>
+    <Container className="brands-container">
+      <h1 className="display-7 text-center">Models</h1>
+      {isLoading ? (
+        <div>Loading ...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <section className="models-grid">
+          {models.length > 0 ? models.map((model) => (
+            <div className="model-item" key={model._id}>
+              <Link
+                to={`/brands/allBrandModels/${brandId}/${model._id}`}
+                className="model-link"
+                onClick={() => handleModelClick(model._id)}
+              >
+                <div className="logo">
+                  <img src={model.images[0]} alt={model.model} />
+                </div>
+                <p>{model.model}</p>
+              </Link>
+            </div>
+          )) : (
+            <div>No models found for brand {brandId}</div>
+          )}
+        </section>
+      )}
+      {selectedModelId && (
+        <div>
+          Selected Model ID: {selectedModelId}
         </div>
-      ))}
-    </div>
+      )}
+    </Container>
   );
 };
 

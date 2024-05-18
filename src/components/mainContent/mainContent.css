@@ -1,0 +1,21 @@
+.main-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: auto; 
+}
+
+.content-row {
+  display: flex;
+  margin-bottom: 1.5rem;
+  height: 50%; 
+}
+
+.content-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-col > * {
+  flex-grow: 1;
+}

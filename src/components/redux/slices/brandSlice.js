@@ -3,6 +3,7 @@ import axios from "axios";
 
 const initialState = {
     brands: [],
+    models: [],
     isLoading: false,
     error: null,
 };
@@ -12,7 +13,6 @@ export const fetchBrands = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const response = await axios.get('https://smartphonearena-be-production.up.railway.app/brands');
-            console.log(response.data)
             return response.data.allBrand;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -25,13 +25,12 @@ export const fetchModelsByBrand = createAsyncThunk(
     async (brandId, thunkAPI) => {
         try {
             const response = await axios.get(`https://smartphonearena-be-production.up.railway.app/brands/allBrandModels/${brandId}`);
-            return { brandId, models: response.data.allModels };
+            return response.data.models;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
-
 
 const brandsSlice = createSlice({
     name: 'brands',
@@ -40,11 +39,8 @@ const brandsSlice = createSlice({
         setBrands: (state, action) => {
             state.brands = action.payload;
         },
-        setBrandModels: (state, action) => {
-            const brand = state.brands.find(brand => brand.id === action.payload.brandId);
-            if (brand) {
-                brand.models = action.payload.models;
-            }
+        setModels: (state, action) => {
+            state.models = action.payload;
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;
@@ -69,13 +65,7 @@ const brandsSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(fetchModelsByBrand.fulfilled, (state, action) => {
-                const { brandId, models } = action.payload;
-                const brand = state.brands.find(brand => brand.id === brandId);
-                
-                if (brand) {
-                    brand.models = models;
-                }
-
+                state.models = action.payload;
                 state.isLoading = false;
                 state.error = null;
             })
@@ -90,5 +80,5 @@ const brandsSlice = createSlice({
     }
 });
 
-export const { setBrands, setBrandModels, setLoading, setError } = brandsSlice.actions;
+export const { setBrands, setModels, setLoading, setError } = brandsSlice.actions;
 export default brandsSlice.reducer;

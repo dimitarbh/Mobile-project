@@ -9,20 +9,15 @@ const Brands = () => {
     const dispatch = useDispatch();
     const { brands, isLoading, error } = useSelector(state => state.brands);
     const [selectedBrandId, setSelectedBrandId] = useState(null);
-
+    console.log("Brands:", brands);
     useEffect(() => {
         dispatch(fetchBrands()); 
     }, [dispatch]); 
 
-    console.log("Brands Data:", brands);
-    console.log("Brands Data:", brands.id);
-    console.log("Redux State:", useSelector((state) => state));
-    console.log("Brands Data:", brands.map(brand => brand.id));
-
-
     const handleBrandClick = (brandId) => {
         console.log("Clicked Brand ID:", brandId);
         setSelectedBrandId(brandId);
+        navigate(`/brands/allBrandModels/${brandId}`);
     };
 
     return (
@@ -35,20 +30,19 @@ const Brands = () => {
             ) : (
                 <section className="brands-grid">
                     {brands.length > 0 ? brands.map((brand, index) => (
-                            <div className="brand-item" key={index}>
-                                <Link 
-                                    onClick={() => handleBrandClick(brand.id)}
-                                    to={`/brands/allBrandModels/${brand.id}`} 
-                                    className="brand-link"
-                                >
-                                    <div className="logo">
-                                        <img src={brand.image} alt={brand.brand} />
-                                    </div>
-                                    <p>{brand.brand}</p>
-                                </Link>
-                            </div>
-                        ))
-                    : (
+                        <div className="brand-item" key={index}>
+                            <Link 
+                                to={`/brands/allBrandModels/${brand._id}`} 
+                                className="brand-link"
+                                onClick={() => handleBrandClick(brand._id)}
+                            >
+                                <div className="logo">
+                                    <img src={brand.image} alt={brand.brand} />
+                                </div>
+                                <p>{brand.brand}</p>
+                            </Link>
+                        </div>
+                    )) : (
                         <div>No brands data available</div>
                     )}
                 </section>
