@@ -12,9 +12,9 @@ const Footer = () => {
                 <div className="social-icons-container">
                     <Navbar.Text className="follow-text">Follow us on:</Navbar.Text>
                     <Nav className="social-icons">
-                        <Nav.Link href="#" className='social-icon'><FaFacebook /></Nav.Link>
-                        <Nav.Link href="#" className='social-icon'><FaInstagram /></Nav.Link>
-                        <Nav.Link href="#" className='social-icon'><FaLinkedin /></Nav.Link>
+                        <Nav.Link href="https://www.facebook.com/" className='social-icon'><FaFacebook /></Nav.Link>
+                        <Nav.Link href="https://www.instagram.com/" className='social-icon'><FaInstagram /></Nav.Link>
+                        <Nav.Link href="https://www.linkedin.com/" className='social-icon'><FaLinkedin /></Nav.Link>
                     </Nav>
                 </div>
             </Container>

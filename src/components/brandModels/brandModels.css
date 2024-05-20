@@ -17,3 +17,13 @@
   height: auto;
   border-radius: 8px;
 }
+
+.model-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.model-link p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}

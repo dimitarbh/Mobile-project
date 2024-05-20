@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container } from 'react-bootstrap';
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchModelsByBrand } from "../redux/slices/brandSlice";
 import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import './brandModels.css'
+import { Link } from "react-router-dom";
+import "./brandModels.css";
 
 const BrandModels = () => {
   const dispatch = useDispatch();
@@ -33,29 +33,27 @@ const BrandModels = () => {
         <div>Error: {error}</div>
       ) : (
         <section className="models-grid">
-          {models.length > 0 ? models.map((model) => (
-            <div className="model-item" key={model._id}>
-              <Link
-                to={`/brands/allBrandModels/${brandId}/${model._id}`}
-                className="model-link"
-                onClick={() => handleModelClick(model._id)}
-              >
-                <div className="logo">
-                  <img src={model.images[0]} alt={model.model} />
-                </div>
-                <p>{model.model}</p>
-              </Link>
-            </div>
-          )) : (
+          {models.length > 0 ? (
+            models.map((model) => (
+              <div className="model-item" key={model._id}>
+                <Link
+                  to={`/brands/allBrandModels/${brandId}/${model._id}`}
+                  className="model-link"
+                  onClick={() => handleModelClick(model._id)}
+                >
+                  <div className="logo">
+                    <img src={model.images[0]} alt={model.model} />
+                  </div>
+                  <p>{model.model}</p>
+                </Link>
+              </div>
+            ))
+          ) : (
             <div>No models found for brand {brandId}</div>
           )}
         </section>
       )}
-      {selectedModelId && (
-        <div>
-          Selected Model ID: {selectedModelId}
-        </div>
-      )}
+      {selectedModelId && <div>Selected Model ID: {selectedModelId}</div>}
     </Container>
   );
 };

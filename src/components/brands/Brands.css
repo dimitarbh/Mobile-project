@@ -1,34 +1,50 @@
 .brands-container {
-    border: 3px solid #ccc;
-    border-radius: 10px;
-    margin-top: 20px;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  margin-top: 20px;
 }
-
 
 .brands-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0px;
 }
 
-
+.brand-link {
+  text-decoration: none;
+  color: inherit;
+}
 
 .brand-item {
-    text-align: center;
-    align-self: center;
-    padding: 0.5rem;
-    margin-top: 30px;
+  text-align: center;
+  align-self: center;
+  padding: 0.5rem;
+  margin-top: 30px;
 }
 
-
 .brand-item img {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
 }
 
 .brand-item p {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #333;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.text-center {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.text-center::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 50%;
+  transform: translateX(-50%);
+  border-bottom: 2px solid #bdbdbd;
 }

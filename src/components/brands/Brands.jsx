@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBrands } from '../redux/slices/brandSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Brands.css';
 
 const Brands = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // Added navigate
     const { brands, isLoading, error } = useSelector(state => state.brands);
     const [selectedBrandId, setSelectedBrandId] = useState(null);
-    console.log("Brands:", brands);
+    
     useEffect(() => {
         dispatch(fetchBrands()); 
     }, [dispatch]); 
 
     const handleBrandClick = (brandId) => {
-        console.log("Clicked Brand ID:", brandId);
         setSelectedBrandId(brandId);
         navigate(`/brands/allBrandModels/${brandId}`);
     };
