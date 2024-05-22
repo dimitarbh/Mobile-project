@@ -25,10 +25,9 @@ const TopRated = () => {
     const [newComment, setNewComment] = useState("");
     const [likes, setLikes] = useState({});
     const [dislikes, setDislikes] = useState({});
-    const isLoggedIn = true; // Replace this with actual authentication logic
-    const isAdmin = true; // Replace this with actual admin logic
+    const isLoggedIn = true; 
+    const isAdmin = true; 
 
-    // Retrieve data from localStorage when the component mounts
     useEffect(() => {
         const storedLikes = JSON.parse(localStorage.getItem("likes")) || {};
         const storedDislikes = JSON.parse(localStorage.getItem("dislikes")) || {};
@@ -36,7 +35,6 @@ const TopRated = () => {
         setDislikes(storedDislikes);
     }, []);
 
-    // Save likes and dislikes to localStorage whenever they are updated
     useEffect(() => {
         localStorage.setItem("likes", JSON.stringify(likes));
         localStorage.setItem("dislikes", JSON.stringify(dislikes));
