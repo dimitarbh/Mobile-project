@@ -1,4 +1,3 @@
-// src/components/news/News.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { load } from 'cheerio';
