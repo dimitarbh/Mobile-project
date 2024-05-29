@@ -7,6 +7,7 @@ import TopRated from "../topRatedSmartphones/TopRated.jsx";
 import BattleOfTheWeek from "../battleOfTheWeek/BattleOfTheWeek.jsx";
 import BrandModels from "../brandModels/brandModels.jsx";
 import ModelDetails from "../modelDetails/ModelDetails.jsx";
+import News from "../news/News.jsx";
 import "./mainContent.css";
 
 const MainContent = () => {
@@ -17,6 +18,7 @@ const MainContent = () => {
           <Route exact path="/" element={<Brands />} />
           <Route path="/brands/allBrandModels/:brandId" element={<BrandModels />} />
           <Route path="/brands/allBrandModels/:brandId/:modelId" element={<ModelDetails />} />
+          <Route path="/news" element={<News />} />
         </Routes>
         <TopRated />
       </div>

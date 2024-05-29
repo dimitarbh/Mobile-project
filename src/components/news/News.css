@@ -1,0 +1,30 @@
+/* src/components/news/News.css */
+.news-container {
+    padding: 20px;
+  }
+  
+  .news-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .news-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    width: calc(33.333% - 20px);
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .news-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .news-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  

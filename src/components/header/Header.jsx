@@ -31,7 +31,7 @@ const Header = ({ onSignOut }) => {
     localStorage.removeItem('token');
     setShowProfileModal(false);
     setIsLoggedIn(false);
-    navigate('/login'); // Redirect to login page after sign out
+    navigate('/login'); 
   };
 
   const handleLoginSuccess = () => {
