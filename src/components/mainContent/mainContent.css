@@ -1,6 +1,6 @@
 .main-content {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2 parts for left, 1 part for right */
+  grid-template-columns: 2fr 1fr; 
   gap: 20px;
   height: auto;
 }
@@ -14,7 +14,7 @@
 }
 
 .left-column {
-  grid-template-rows: 1fr auto; /* The first row grows as needed */
+  grid-template-rows: 1fr auto; 
 }
 
 .content-row {

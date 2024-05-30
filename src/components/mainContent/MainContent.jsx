@@ -8,6 +8,8 @@ import BattleOfTheWeek from "../battleOfTheWeek/BattleOfTheWeek.jsx";
 import BrandModels from "../brandModels/brandModels.jsx";
 import ModelDetails from "../modelDetails/ModelDetails.jsx";
 import News from "../news/News.jsx";
+import Reviews from "../reviews/Reviews.jsx";
+import Deals from "../deals/Deals.jsx";
 import "./mainContent.css";
 
 const MainContent = () => {
@@ -19,6 +21,8 @@ const MainContent = () => {
           <Route path="/brands/allBrandModels/:brandId" element={<BrandModels />} />
           <Route path="/brands/allBrandModels/:brandId/:modelId" element={<ModelDetails />} />
           <Route path="/news" element={<News />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/deals" element={<Deals />} />
         </Routes>
         <TopRated />
       </div>

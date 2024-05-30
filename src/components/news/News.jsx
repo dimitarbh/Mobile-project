@@ -18,9 +18,9 @@ const News = () => {
         const newsItems = [];
 
         $('.news-item').each((i, elem) => {
-          const title = $(elem).find('.news-item-title').text().trim();
           const link = $(elem).find('a').attr('href');
           const imageUrl = $(elem).find('img').attr('src');
+          const title = $(elem).find('h2').text();
 
           newsItems.push({ title, link: `https://m.gsmarena.com/${link}`, imageUrl });
         });
@@ -36,7 +36,7 @@ const News = () => {
 
   return (
     <div className="news-container">
-      <h2>Latest News</h2>
+      <h2 className="title">Latest News</h2>
       <div className="news-items">
         {news.map((item, index) => (
           <div key={index} className="news-item">
