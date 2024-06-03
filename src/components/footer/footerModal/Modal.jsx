@@ -18,7 +18,7 @@ function FooterModal() {
 
             <Modal show={show} onHide={handleClose} className="custom-modal"> {/* Apply custom class */}
                 <Modal.Header closeButton>
-                    <Modal.Title>Do you have any questions</Modal.Title>
+                    <Modal.Title>Do you have any questions?</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>

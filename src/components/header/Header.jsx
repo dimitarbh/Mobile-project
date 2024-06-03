@@ -52,7 +52,7 @@ const Header = ({ onSignOut }) => {
                 <Route path="/news" element={<Navigation />} />
                 <Route path="/reviews" element={<Navigation />} />
                 <Route path="/deals" element={<Navigation />} />
-                <Route path="/contact" element={<Navigation />} />
+                <Route path="/about-us" element={<Navigation />} />
               </Routes>
             </Nav>
             <Nav>

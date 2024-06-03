@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
-import { Modal, Button, Form, Spinner } from "react-bootstrap";
-
 import { useDispatch, useSelector } from "react-redux";
 import { profile as profileAction } from "../../redux/slices/authSlice.js";
 
@@ -9,7 +7,7 @@ const ProfileParentComponent = () => {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [currentEmail, setCurrentEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(true); // Start with edit mode enabled
   const [error, setError] = useState("");
   const [profilePicture, setProfilePicture] = useState(
     "https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"
@@ -19,7 +17,7 @@ const ProfileParentComponent = () => {
   const { profile, isLoading, error: profileError } = useSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(profileAction())
+    dispatch(profileAction());
   }, [dispatch]);
 
   const handleCloseProfileModal = () => {

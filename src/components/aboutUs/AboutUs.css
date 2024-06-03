@@ -1,0 +1,22 @@
+.about-us-container {
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.about-us-container h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.about-us-container p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #555;
+}

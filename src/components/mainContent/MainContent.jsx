@@ -10,6 +10,7 @@ import ModelDetails from "../modelDetails/ModelDetails.jsx";
 import News from "../news/News.jsx";
 import Reviews from "../reviews/Reviews.jsx";
 import Deals from "../deals/Deals.jsx";
+import AboutUs from "../aboutUs/AboutUs.jsx";
 import "./mainContent.css";
 
 const MainContent = () => {
@@ -23,6 +24,7 @@ const MainContent = () => {
           <Route path="/news" element={<News />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/deals" element={<Deals />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
         <TopRated />
       </div>
