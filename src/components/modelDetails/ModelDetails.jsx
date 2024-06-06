@@ -38,7 +38,7 @@ const ModelDetails = () => {
           <Col md={8} className="d-flex align-items-center">
             <Card.Body className="text-right">
               <Card.Title className="title">{selectedModel.model}</Card.Title>
-              <Card.Text>
+              <Card.Text className="mt-4">
                 <p>Price: {selectedModel.price}</p>
                 <p>Release Date: {new Date(selectedModel.releaseDate).toLocaleDateString()}</p>
                 <p>Display Size: {selectedModel.displaySize}</p>

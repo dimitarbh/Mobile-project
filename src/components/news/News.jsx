@@ -5,6 +5,8 @@ import './News.css';
 
 const News = () => {
   const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -26,8 +28,11 @@ const News = () => {
         });
 
         setNews(newsItems);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching news:', error);
+        setError(error.message);
+        setIsLoading(false);
       }
     };
 
@@ -37,16 +42,26 @@ const News = () => {
   return (
     <div className="news-container">
       <h2 className="title">Latest News</h2>
-      <div className="news-items">
-        {news.map((item, index) => (
-          <div key={index} className="news-item">
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              {item.imageUrl && <img src={item.imageUrl} alt={item.title} />}
-              <h3>{item.title}</h3>
-            </a>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <div className="news-items">
+          {news.length > 0 ? (
+            news.map((item, index) => (
+              <div key={index} className="news-item">
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  {item.imageUrl && <img src={item.imageUrl} alt={item.title} />}
+                  <h3>{item.title}</h3>
+                </a>
+              </div>
+            ))
+          ) : (
+            <div>No news available</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

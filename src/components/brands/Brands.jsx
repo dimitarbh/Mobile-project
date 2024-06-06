@@ -7,7 +7,7 @@ import './Brands.css';
 
 const Brands = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate(); // Added navigate
+    const navigate = useNavigate();
     const { brands, isLoading, error } = useSelector(state => state.brands);
     const [selectedBrandId, setSelectedBrandId] = useState(null);
     

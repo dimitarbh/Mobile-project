@@ -5,7 +5,7 @@ const initialState = {
     isLoading: false,
     error: null,
     profile: null,
-}
+};
 
 export const login = createAsyncThunk(
     'auth/login',
@@ -16,21 +16,21 @@ export const login = createAsyncThunk(
                 {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({email, password})
+                    body: JSON.stringify({ email, password })
                 }
-            )
+            );
             if(!response.ok){
-                const errorData = await response.json()
-                return thunkAPI.rejectWithValue(errorData)
+                const errorData = await response.json();
+                return thunkAPI.rejectWithValue(errorData);
             }
-            const userData = await response.json()
+            const userData = await response.json();
             thunkAPI.dispatch(loginSuccess(userData));
-            return userData.user
+            return userData.user;
         } catch(error){
-            return thunkAPI.rejectWithValue(error.message)
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
-)
+);
 
 export const register = createAsyncThunk(
     'auth/register',
@@ -41,21 +41,21 @@ export const register = createAsyncThunk(
                 {
                     method: 'POST',
                     headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({email, password})
+                    body: JSON.stringify({ email, password })
                 }
-            )
+            );
             if(!response.ok){
-                const errorData = await response.json()
-                return thunkAPI.rejectWithValue(errorData)
+                const errorData = await response.json();
+                return thunkAPI.rejectWithValue(errorData);
             }
-            const userData = await response.json()
-            thunkAPI.dispatch(login({email, password}))
-            return userData
+            const userData = await response.json();
+            thunkAPI.dispatch(login({email, password}));
+            return userData;
         } catch(error){
-            return thunkAPI.rejectWithValue(error.message)
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
-)
+);
 
 export const profile = createAsyncThunk(
     'auth/profile',
@@ -79,53 +79,88 @@ export const profile = createAsyncThunk(
     }
 );
 
+export const updateProfile = createAsyncThunk(
+    'auth/updateProfile',
+    async({ email, password, profilePicture }, thunkAPI) => {
+        try {
+            const response = await fetch(
+                'https://smartphonearena-be-production.up.railway.app/auth/updateProfile',
+                {
+                    method: 'PUT',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ email, password, profilePicture })
+                }
+            );
+            if (!response.ok) {
+                const errorData = await response.json();
+                return thunkAPI.rejectWithValue(errorData);
+            }
+            const updatedProfile = await response.json();
+            return updatedProfile;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
 const authAPI = createSlice({
     name: 'auth',
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
-            state.user = action.payload
+            state.user = action.payload;
         },
         logout: (state) => {
-            state.user = null
-        },
-        updateProfile: (state, action) => {
-            state.profile = action.payload
+            state.user = null;
         }
     },
     extraReducers: (builder) => {
         builder
         .addCase(login.fulfilled,(state, action) => {
-            state.user = action.payload
-            state.error = null 
+            state.user = action.payload;
+            state.error = null;
         })
         .addCase(register.fulfilled, (state, action) => {
-            state.user = action.payload
-            state.error = null 
+            state.user = action.payload;
+            state.error = null;
         })
         .addCase(register.pending, (state) => {
-            state.isLoading = true
-            state.error = null
+            state.isLoading = true;
+            state.error = null;
         })
         .addCase(register.rejected, (state, action) => {
-            state.isLoading = false
-            state.error = action.payload
+            state.isLoading = false;
+            state.error = action.payload;
         })
         .addCase(profile.fulfilled, (state, action) => {
-            state.profile = action.payload
-            state.isLoading = false
-            state.error = null
+            state.profile = action.payload;
+            state.isLoading = false;
+            state.error = null;
         })
         .addCase(profile.pending, (state) => {
-            state.isLoading = true
-            state.error = null
+            state.isLoading = true;
+            state.error = null;
         })
         .addCase(profile.rejected, (state, action) => {
-            state.isLoading = false
-            state.error = action.payload
+            state.isLoading = false;
+            state.error = action.payload;
         })
+        .addCase(updateProfile.fulfilled, (state, action) => {
+            console.log('Updated profile:', action.payload); 
+            state.profile = action.payload;
+            state.isLoading = false;
+            state.error = null;
+        })
+        .addCase(updateProfile.pending, (state) => {
+            state.isLoading = true;
+            state.error = null; 
+        })
+        .addCase(updateProfile.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        });
     }
-})
+});
 
-export const {loginSuccess, logout, updateProfile} = authAPI.actions
-export default authAPI.reducer
+export const { loginSuccess, logout } = authAPI.actions;
+export default authAPI.reducer;

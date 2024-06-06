@@ -5,6 +5,8 @@ import './Deals.css';
 
 const Deals = () => {
   const [deals, setDeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDeals = async () => {
@@ -27,8 +29,11 @@ const Deals = () => {
         });
 
         setDeals(dealsItems);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching deals:', error);
+        setError(error.message);
+        setIsLoading(false);
       }
     };
 
@@ -38,17 +43,27 @@ const Deals = () => {
   return (
     <div className="deals-container">
       <h2 className="title">Deals</h2>
-      <div className="deals-items">
-        {deals.map((item, index) => (
-          <div key={index} className="deals-item">
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              <img src={item.imageUrl} alt={item.title} />
-              <h3>{item.title}</h3>
-              <h3>{item.price}</h3>
-            </a>
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <div className="deals-items">
+          {deals.length > 0 ? (
+            deals.map((item, index) => (
+              <div key={index} className="deals-item">
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <img src={item.imageUrl} alt={item.title} />
+                  <h3>{item.title}</h3>
+                  <h3>{item.price}</h3>
+                </a>
+              </div>
+            ))
+          ) : (
+            <div>No deals available</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
