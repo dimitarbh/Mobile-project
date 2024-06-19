@@ -49,7 +49,7 @@ Dynamic Data
 	The project fetches dynamic data from a MongoDB database. The data includes smartphone specifications, user comments, and voting information, which are then rendered dynamically on the front-end.
 
 Back-End
-	The back-end of this project is written entirely by me. It handles data management, API endpoints, and database interactions to ensure smooth and efficient operations of the SmartphoneArena platform.
+	The back-end of this project is written entirely by me. It handles data management, API endpoints, and database interactions to ensure smooth and efficient operations of the SmartphoneArena platform. You can see it ->
 	[here](https://github.com/dimitarbh/SmartphoneArena-BE).
  
 Contributing
