@@ -65,7 +65,12 @@ License
 
 Contact
 	For any questions or feedback, feel free to reach out to me:
- 
+
+ LinkedIn: [here](www.linkedin.com/in/dimitar-hadzhiyanchev-453702296)
+  
+  or
+  
+	
 	Email: dimitarbh@gmail.com
  or
  
